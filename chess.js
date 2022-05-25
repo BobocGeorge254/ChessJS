@@ -88,12 +88,12 @@ BlackQueen.src = "BlackQueen.png" ;
 
 
 var Tabla1 = {
-    a1 : WhiteRookA , b1 : WhiteKnightB , c1 : WhiteBishopC , d1 : WhiteKing ,
-    e1 : WhiteQueen , f1 : WhiteBishopF , g1 : WhiteKnightG , h1 : WhiteRookH ,
+    a1 : WhiteRookA , b1 : WhiteKnightB , c1 : WhiteBishopC , d1 : WhiteQueen ,
+    e1 : WhiteKing , f1 : WhiteBishopF , g1 : WhiteKnightG , h1 : WhiteRookH ,
     a2 : WhitePawnA, b2 : WhitePawnB , c2 : WhitePawnC , d2 : WhitePawnD , 
     e2 : WhitePawnE , f2 : WhitePawnF , g2 : WhitePawnG , h2 : WhitePawnH ,
-    a8 : BlackRookA , b8 : BlackKnightB , c8 : BlackBishopC , d8 : BlackKing ,
-    e8 : BlackQueen , f8 : BlackBishopF , g8 : BlackKnightG , h8 : BlackRookH ,
+    a8 : BlackRookA , b8 : BlackKnightB , c8 : BlackBishopC , d8 : BlackQueen ,
+    e8 : BlackKing , f8 : BlackBishopF , g8 : BlackKnightG , h8 : BlackRookH ,
     a7 : BlackPawnA, b7 : BlackPawnB , c7 : BlackPawnC , d7 : BlackPawnD , 
     e7 : BlackPawnE , f7 : BlackPawnF , g7 : BlackPawnG , h7 : BlackPawnH 
 };
@@ -109,8 +109,8 @@ function getColumn(j) {
     if ( j == 8 ) return 'h' ;
 }
 
-window.onload = function() {
-    var chessContainer = document.getElementById('chessContainer') ;
+var chessContainer = document.getElementById('chessContainer') ;
+function drawInitialState() {
     for (let i = 1 ; i <= 8 ; ++i)
     {
         var row = document.createElement('div') ;
@@ -124,7 +124,7 @@ window.onload = function() {
             position = dx + dy;
             square.classList.add('square') ;
             square.innerHTML = position;
-            if ( (i + j) % 2 == 1 ){
+            if ( (i + j) % 2 == 0 ){
                 square.style.backgroundColor = 'white' ;
             } 
             else {
@@ -134,14 +134,14 @@ window.onload = function() {
             if ( position in Tabla1 ) {
                 square.appendChild(Tabla1[position]) ;
             }
-            square.onmousedown = function () {
-                let initalPosition = square.innerHTML ;
-                console.log(initalPosition);
-            }
-            square.onmouseup = function() {
-                square.appendChild(Tabla1[initalPosition]) ;
-            }
         }
         chessContainer.appendChild(row) ;
     }
+}
+
+var start = false ;
+
+window.onload = function() {
+    drawInitialState() ;
+     
 }
